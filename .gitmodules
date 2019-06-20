@@ -1,0 +1,3 @@
+[submodule "imklib-tutorial"]
+	path = imklib-tutorial
+	url = https://github.com/hanslovsky/imklib-tutorial.git
