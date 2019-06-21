@@ -1,3 +1,6 @@
 [submodule "imklib-tutorial"]
 	path = imklib-tutorial
 	url = https://github.com/hanslovsky/imklib-tutorial.git
+[submodule "knip-course"]
+	path = knip-course
+	url = https://github.com/knime-ip/knip-course.git
