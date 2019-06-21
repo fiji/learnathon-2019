@@ -1,0 +1,9 @@
+/.metadata/
+/.classpath
+/.project
+/.settings
+/target/
+/images/
+/.recommenders/
+*~
+*.swp

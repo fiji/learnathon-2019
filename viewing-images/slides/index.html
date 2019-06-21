@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Viewing Images Fiji Learnathon</title>
+
+		<meta name="description" content="A tutorial showing how to visualize imagej data within Java Code">
+		<meta name="author" content="Brian Northan">i
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js-3.1.0/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js-3.1.0/css/print/pdf.css' : '../reveal.js-3.1.0/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<script type="text/javascript"
+            		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js-3.1.0/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h2>Viewing Images</h2>
+					<p>
+					Viewing Image Data within ImageJ2 Java Code
+					<small>
+						<a href="https://github.com/bnorthan">Brian Northan</a>,
+						<a href="http://www.truenorth-ia.com/">True North Intelligent Algorithms LLC</a>
+					</small>
+					</p>
+				</section>
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h3>Goals</h3>
+					<section>
+						<ol>
+							<li>Learn to show images within Java programs using both ImageJ1 and ImageJ2</li>
+							<li>Learn to access ImageJ1 Visualization routines from your java program</li>
+							<li>Learn how to use ImageJ2 API (ops, imglib2, Views, etc.) for basic visualization</li> 
+							<ul>
+								<li>Ops and Imglib2 will be explained in detail in later sessions</li>
+							</ul>
+							<li>Learn to display multidimensional and complex data</li>
+							<li>Basic use of imglib2 to render data</li>
+							
+					</ol>
+					</section>
+				</section>
+
+					<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h3>Example 1 Open and Display Images</h3>
+
+				 <section>
+				 	<ul>
+						<li>Open Image using IJ1 and IJ2 API</li>
+						<li>Open up an Image Display inside programs</li>
+						<li>Display result of command using annotation</li>
+					</ul>
+				 </section>
+
+
+					<section>
+						<p>Start ImageJ</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// create an instance of imagej
+final ImageJ ij = new ImageJ();
+
+// launch it
+ij.ui().showUI();
+
+						</code></pre>
+					</section>
+					<section>
+						<p>Open Some Image Data</p>
+						<ul>
+							<li>ImageJ1 ImagePlus</li>
+							<li>ImageJ2 Dataset</li>
+						</ul>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// get bridge as IJ1 ImagePlus (imp)
+ImagePlus impBridge = IJ.openImage("../images/bridge.tif");
+
+// get bridge as IJ2 Dataset
+// Dataset
+Dataset datasetBridge = (Dataset) ij.io().open("../images/bridge.tif");
+
+						</code></pre>
+					</section>
+					<section>
+						<p>Display Image using IJ1</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// show the IJ1 ImagePlus
+impBridge.show();
+impBridge.setTitle("ImageJ1 ImagePlus");
+						</code></pre>
+					</section>
+
+					<section>
+						<p>Display Image using IJ2 UIService</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// show the IJ2 Dataset
+ij.ui().show("Bridge IJ2 ij.ui().show", datasetBridge);
+						</code></pre>
+					</section>
+					<section>
+						<p>Display Image using IJ2 ImageJFunctions</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// show using imagej functions
+ImageJFunctions.show((RandomAccessibleInterval) datasetBridge
+	.getImgPlus()).setTitle("Bridge IJ2 ImageJFunctions.show");
+						</code></pre>
+					</section>
+
+					<section>
+							<img src="OpenImages.jpg" height="400">
+						</section>
+	
+					<section>
+						<p>Display output of Command</p>
+						<ul>
+							<li>Framework does it automatically</li>
+						</ul>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+@Parameter(type = ItemIO.OUTPUT)
+Img out;
+
+@Override
+public void run() {
+	out = ops.create().img(in);
+	ops.filter().addPoissonNoise(out, in);
+}
+						</code></pre>
+					</section>
+	
+					<section>
+							<img src="Command.jpg" height="400">
+						</section>
+			
+			</section>	
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h2>Example 2 Mixed World</h2>
+
+				 <section>
+				 	<ul>
+						<li>Open Image and process using IJ2</li>
+						<li>Display using IJ1 API</li>
+						<li>Re-use legacy code to show a colormap</li>
+						<li>Use IJ1 API for line profiles</li>
+					</ul>
+				 </section>
+
+					<section>
+						<h3>Start IJ, load image and blur it</h3>
+						<ul>
+							<li>Use ImageJ-ops to apply Gaussian blur</li>
+							<li><a href="https://github.com/imagej/imagej-ops">Ops is an extensible library for algorithms</a></li>
+							<li>More on Ops next session...</li>
+						</ul>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+// create an instance of imagej
+final ImageJ ij = new ImageJ();
+
+// launch it
+ij.launch(args);
+
+// get bridge as IJ2 Dataset
+Dataset dataBridge = (Dataset) ij.io().open("../images/bridge.tif");
+
+// blur the bridge
+RandomAccessibleInterval blurred = ij.op().filter().gauss(
+	(RandomAccessibleInterval) dataBridge, 3.0);
+		
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Convert to IJ1 and show...</h3>
+					<pre><code class="java" data-trim data-noescape contenteditable>
+// convert bridge to IJ1
+ImagePlus impBridge = ImageJFunctions.wrap(
+(RandomAccessibleInterval) dataBridge, "bridge");
+// convert blurred to IJ1
+ImagePlus impBlurred = ImageJFunctions.wrap(blurred, "blurred");
+
+// show IJ1
+impBridge.show();
+impBlurred.show();
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Scavenge 'fire' LUT from IJ1 LutLoader</h3>
+						<ul>
+							<li>[Ctrl] [Shift] [T] then search for LutLoader</li>
+							<li>Look for fire method (not public??)</li>
+							<li>Scavenge fire and interpolate functions</li>
+						</ul>
+
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+// get the fire color map using the Utility
+// (note the code in the Utility was cut and pasted from LutLoader
+// I couldn't figure out how to cleanly grab the fire LUT from it....
+LUT lut = IJ2CourseImageUtility.fire();
+
+// set the LUT on the bridge and blurred
+impBridge.setLut(lut);
+impBridge.updateAndRepaintWindow();
+
+impBlurred.setLut(lut);
+impBlurred.updateAndRepaintWindow();
+
+
+						</code></pre>
+					</section>
+
+					<section>
+						<img src="bridge.jpg">
+					</section>
+
+					<section>
+						<img src="blurred.jpg">
+					</section>
+
+					<section>
+						<p>Use IJ1 API to draw line profiles</p>
+						<ul>
+							<li>Line profiles are useful for before and after comparisons</li>
+						</ul>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+// now draw an ROI (using the IJ1 interface) on each image and plot it
+impBridge.setRoi(new Line(100, 100, 200, 200));
+impBlurred.setRoi(new Line(100, 100, 200, 200));
+ProfilePlot plotter1 = new ProfilePlot(impBridge);
+ProfilePlot plotter2 = new ProfilePlot(impBlurred);
+
+plotter1.createWindow();
+plotter2.createWindow();
+	
+						
+						</code></pre>
+					</section>
+
+
+					<section>
+						<img src="lineprofiles.jpg">
+					</section>
+
+					<section>
+						<ul>
+							<li>Run your favourite IJ1 routine</li>	
+							<li>Use Plugins->Macros->Record...(java)</li>
+						<ul>
+						<img src="RecordJava.jpg" height="400">
+					</section>
+
+			</section>
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h3>Example 3a Viewing cropped intervals</h3> 
+
+					<section>
+						<ul>
+							<li>Use ops to crop</li>
+							<li>Alternatively use Views</li>
+							<li>More on ops and Views in a later session</li>
+						<li>Draw a sphere on the data</li>
+						 <ul>
+							 <li>What happens on the RAI?</li>
+						 </ul>
+					</ul>	
+						<pre><code class="java" data-trim data-noescape contenteditable>
+Interval interval = Intervals.createMinMax(100, 100, 20, 400, 400, 40);
+
+// crop interval
+RandomAccessibleInterval raiVolume = (RandomAccessibleInterval) ij
+	.op().transform().crop(image, interval);
+
+
+// alternatively you can use Views directly
+RandomAccessibleInterval<T> rai2 = (RandomAccessibleInterval<T>) Views
+	.interval(image, interval);
+
+// display the image
+ij.ui().show("RAI volume", raiVolume);
+						</code></pre>
+					</section>
+
+					<section>
+						<p>Draw Sphere Command</p>
+						<pre><code class="c++" data-trim data-noescape contenteditable>
+@Plugin(type = Command.class,
+	menuPath = "Plugins>Learnathon>Draw A Sphere (IJ2)")
+public class DrawSphereInCenter<T extends RealType<T> & NativeType<T>>
+	implements Command
+{
+
+	@Parameter
+	OpService ops;
+
+	@Parameter
+	Img<T> img;
+
+	@Override
+	public void run() {
+		final Point center = new Point(img.numDimensions());
+
+		for (int d = 0; d < img.numDimensions(); d++)
+			center.setPosition(img.dimension(d) / 2, d);
+
+		long radius = Math.min(img.dimension(0), Math.min(img.dimension(1), img
+			.dimension(2)));
+
+		T intensity = ops.stats().max(Views.iterable(img));
+
+		HyperSphere<T> hyperSphere = new HyperSphere<>(img, center, radius);
+
+		for (final T value : hyperSphere) {
+			value.setReal(intensity.getRealFloat());
+		}
+	}
+}
+						
+						</code></pre>
+					</section>
+
+
+					<section>
+						<img src="SphereInRAI.jpg" height="500">
+					</section>
+				</section>
+
+		<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+			<h3>Example 3b Out of bounds?</h3> 
+
+
+					<section>
+						<h3>What if the Interval is out of bounds</h3>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+Interval interval = Intervals.createMinMax(-100, 100, 200, 700);
+	
+// Try cropping with an interval that goes out of bounds... 
+RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) Views
+	.interval(image, interval);
+
+// try again but extend image... (comment out above code, comment in this code)
+//RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) Views
+	//	.interval(Views.extendZero(image), interval);
+
+// display the image
+ij.ui().show("RAI", rai);
+			
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Try again...</h3>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+Interval interval = Intervals.createMinMax(-100, 100, 200, 700);
+	
+// Try cropping with an interval that goes out of bounds... 
+//RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) Views
+//	.interval(image, interval);
+
+// try again but extend image... (comment out above code, comment in this code)
+RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) Views
+		.interval(Views.extendZero(image), interval);
+
+// display the image
+ij.ui().show("RAI", rai);
+						
+						</code></pre>
+					</section>
+
+
+					<section>
+						<img src="CropOutOfBounds.jpg" height="500">
+					</section>
+				</section>
+
+		<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+			<h3>Example 3c crop hyperslice</h3> 
+
+					<section>
+						<p>Show axis info using dimension index</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+
+for (int d = 0; d < image.numDimensions(); d++) {
+	ij.log().info(image.axis(d).type());
+	ij.log().info(image.dimension(d));
+	ij.log().info("");
+}
+				</code></pre>
+					</section>
+
+					<section>
+						<h3>Show axis size using axis enumeration</h3>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+int xIndex = image.dimensionIndex(Axes.X);
+int yIndex = image.dimensionIndex(Axes.Y);
+int zIndex = image.dimensionIndex(Axes.Z);
+int cIndex = image.dimensionIndex(Axes.CHANNEL);
+int tIndex = image.dimensionIndex(Axes.TIME);
+
+long xLen = image.dimension(image.dimensionIndex(Axes.X));
+long yLen = image.dimension(image.dimensionIndex(Axes.Y));
+long zLen = image.dimension(image.dimensionIndex(Axes.Z));
+long cLen = image.dimension(image.dimensionIndex(Axes.CHANNEL));
+long tLen = image.dimension(image.dimensionIndex(Axes.TIME));
+					</code></pre>
+					</section>
+
+					<section>
+						<h3>Crop Hyperslice using axis index and position</h3>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// we can use Views to get a hyperslice using a dimensions index and position
+RandomAccessibleInterval<T> raiViews = (RandomAccessibleInterval<T>) Views
+	.hyperSlice(image, cIndex, 0);
+				
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Convert to ImgPlus and set axis</h3>
+						<pre><code class="java" data-trim cdata-noescape ontenteditable>
+
+// display the image... note that something isn't quite right
+ij.ui().show("RAI volume", raiViews);
+
+// the cropped section is an RAI. To get it to display correctly we need to
+// use the dtaasetservice to convert it to an ImgPlus with ocrrect axis
+DatasetService datasetService = ij.dataset();
+AxisType[] axisTypes = new AxisType[] { Axes.X, Axes.Y, Axes.Z,
+	Axes.TIME };
+ImgPlus imgPlusVolume = new ImgPlus(datasetService.create(raiViews), "image",
+	axisTypes);
+
+// now the viewer should display the image with correct axis
+ij.ui().show("ImgPlus volume", imgPlusVolume);
+			
+						</code></pre>
+					</section>
+
+					<section>
+						<img src="HyperSlice.jpg" height="500">
+					</section>
+
+			</section>
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h3>Example 4a Permutions</h3>
+					<section>
+						<p>Permute (Reslice) using Views to see xz slices</p>
+						<ul>
+							<li>last 2 parameters are 'from' and 'to'</li>
+							<li>Switch 1 (y) and 2 (z)</li>
+						</ul>
+
+						<pre><code class="java" data-trim data-noescape contenteditable>
+IntervalView<T> dataXZY = Views.permute((RandomAccessibleInterval<T>) data,
+	1, 3);
+
+ij.ui().show("Data XZY", dataXZY);
+						</code></pre>
+					</section>
+
+					<section>
+						<img src="Permutations.jpg" height="400">
+					</section>
+
+				
+				</section>
+
+			<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+				<h3>Example 4b Projections</h3>
+
+
+					<section>
+						<h3>Projections using ops</h3>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+int projectedDimensionIndex = 1;
+
+long[] projectedDimensions = new long[] { imgPlus.dimension(0), imgPlus
+	.dimension(2) };
+
+Img<T> projection = ops.create().img(new FinalDimensions(
+	projectedDimensions), imgPlus.firstElement());
+
+UnaryComputerOp projector = Computers.unary(ops, Ops.Stats.Sum.class,
+	projection.firstElement(), imgPlus);
+
+return ops.transform().project(projection, imgPlus, projector,
+	projectedDimensionIndex);
+
+						</code></pre>
+					</section>
+
+
+					<section>
+						<p>What is wrong with this picture??</p>
+						<img src="Projections.jpg" height="400">
+					</section>
+
+					<section>
+						<p>What is the difference between ProjectBad and ProjectBetter??</p>
+						<img src="Projections.jpg" height="400">
+					</section>
+
+
+			</section>
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h2>Example 5 - Rendering points</h2>
+
+				 <section>
+				 	<ul>
+						<li>By the end of the week you should be able to...</li>
+						<ul>
+						<li>Use imglib2 to render points as Gaussian</li>
+						<li>Use Cursors to loop through data (pixels and more...)</li>
+						<li>Understand how to get and set 'Types'</li>
+						<li>Understand how to perform operations on 'Types'</li>
+					</ul>
+				 </section>
+
+					<section>
+						<ul>
+							<li>This code adds a Gaussian to an image</li>
+							<li>May not make sense yet...</li>
+							<li>It should by the end of the week</li>
+							
+						<pre><code class="java" data-trim data-noescape contenteditable>
+// get the RAI to draw the Gaussian in
+RandomAccessibleInterval<FloatType> rai = Views.interval(img,
+	new FinalInterval(start, end));
+
+Cursor<FloatType> c1 = Views.iterable(Views.zeroMin(rai)).cursor();
+Cursor<FloatType> c2 = Views.iterable(guassian).cursor();
+
+while (c1.hasNext()) {
+	c1.fwd();
+	c2.fwd();
+
+	c1.get().add(c2.get());
+}
+						</code></pre>
+					</section>
+
+				 <section>
+					<img src="RenderingPoints.jpg" height="400">
+				 </section>
+		
+				 <section>
+					 <ul>
+						 <li>Synaptic Clefts from Phillip Hanslovsky</li>
+					 	<li>More to come with this data next session...</li>
+					 </ul>
+					 </ul>
+						<img src="RenderingPoints2.jpg" height="400">
+				 </section>
+			</section>
+
+				<section data-background="http://imagej.net/_images/7/72/Imagej-25%25.png">
+					<h3>Example 6 - Complex Numbers</h3>
+
+					<section>
+						<p>Perform FFT using ops, Display real and complex parts</p>
+						<pre><code class="java" data-trim data-noescape contenteditable>
+	
+RandomAccessibleInterval<FloatType> fft=ij.op().filter().fft(impBridge);
+
+// default is power spectrum
+ImageJFunctions.show(fft).setTitle("fft power spectrum");
+// real values
+ImageJFunctions.show(fft, new ComplexRealFloatConverter<FloatType>()).setTitle("fft real values");
+// imaginary values
+ImageJFunctions.show(fft, new ComplexImaginaryFloatConverter<FloatType>()).setTitle("fft imaginary values");
+						
+						</code></pre>
+					</section>
+
+
+				 <section>
+				 	<ul>
+						<li>Perform an FFT and show complex and real parts</li>
+					</ul>
+						<img src="FFT.jpg" height="400">
+				 </section>
+			</section>
+
+
+
+		</div>
+
+		</div>
+
+		<script src="../reveal.js-3.1.0/lib/js/head.min.js"></script>
+		<script src="../reveal.js-3.1.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+				
+				math: {
+        				mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        				config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+   					 },
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js-3.1.0/plugin/notes/notes.js', async: true },
+					{src: '../reveal.js-3.1.0/plugin/math/math.js', async: true },		
+					]
+			});
+
+		</script>
+
+	</body>
+</html>
