@@ -7,3 +7,6 @@
 [submodule "transforms_tutorial"]
 	path = transforms_tutorial
 	url = git@github.com:bogovicj/transforms_tutorial.git
+[submodule "viewing-images-tutorial"]
+	path = viewing-images-tutorial
+	url = https://github.com/bnorthan/viewing-images-tutorial
