@@ -3,6 +3,7 @@
 # Run this script to update all submodule repositories here
 # to their latest version on their respective master branches.
 
+git submodule init
 git submodule update --recursive --remote &&
 
 echo '
