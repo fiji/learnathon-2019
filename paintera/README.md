@@ -52,12 +52,27 @@ Jgo is installed as a dependency of paintera or is available through the conda-f
 conda install -c conda-forge jgo
 ```
 
+## Supported Data
+Paintera supports single and multi-channel raw data and label data from N5, HDF5, and Google Cloud storage. The preferred format is the Paintera data format but regular single or multi-scale datasets can be imported as well. Any N5-like format can be converted into the preferred Paintera format with the [Paintera Conversion Helper](https://github.com/saalfeldlab/paintera-conversion-helper) that is automatically installed with Paintera from conda. For example, to convert raw and neuron_ids of the [padded sample A](https://cremi.org/static/data/sample_A_padded_20160501.hdf) of the [CREMI](https://cremi.org) challenge, simply run:
+```sh
+paintera-conversion-helper \
+    -r \
+    -d $HOME/Downloads/sample_A_padded_20160501.hdf,volumes/labels/neuron_ids,label \
+    -d $HOME/Downloads/sample_A_padded_20160501.hdf,volumes/raw,raw \
+    -o $HOME/Downloads/sample_A_padded_20160501.n5 \
+    -b 64,64,64 \
+    -s 2,2,1 2,2,1 2,2,1 2,2,2 2,2,2 2,2,2 \
+    -m -1 -1 -1 -1 5 3 2 2 2 1 \
+    --label-block-lookup-backend-n5=10000
+```
+
+Paintera Conversion Helper builds on [Apache Spark](https://spark.apache.org) and can be run on any Spark Cluster, which is particularly useful for large data sets.
+
+Pressing `ctrl-O` inside Paintera triggers a context menu for opening data.
+
+Paintera can be extended with other data sets.
+
 ## Topics
- - Supported data
-   - Raw Data
-   - Label Data
-   - Convert into supported format
-   - Open datasets
  - Navigation
  - 3D visualization
  - Label voxel manipulations
