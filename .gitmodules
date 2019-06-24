@@ -10,3 +10,6 @@
 [submodule "viewing-images-tutorial"]
 	path = viewing-images-tutorial
 	url = https://github.com/bnorthan/viewing-images-tutorial
+[submodule "daisLEARNATHON2019"]
+	path = daisLEARNATHON2019
+	url = git://github.com/haesleinhuepf/daisLEARNATHON2019
