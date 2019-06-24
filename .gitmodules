@@ -13,3 +13,9 @@
 [submodule "daisLEARNATHON2019"]
 	path = daisLEARNATHON2019
 	url = git://github.com/haesleinhuepf/daisLEARNATHON2019
+[submodule "bigdataviewer-workshop"]
+	path = bigdataviewer-workshop
+	url = git://github.com/bigdataviewer/bigdataviewer-workshop
+[submodule "imglib2-introductory-workshop"]
+	path = imglib2-introductory-workshop
+	url = git://github.com/imglib/imglib2-introductory-workshop
