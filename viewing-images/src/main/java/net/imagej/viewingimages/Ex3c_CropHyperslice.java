@@ -68,7 +68,7 @@ public class Ex3c_CropHyperslice {
 
 		// we can use Views to get a hyperslice using a dimensions index and position
 		RandomAccessibleInterval<T> raiViews = (RandomAccessibleInterval<T>) Views
-			.hyperSlice(image, cIndex, 0);
+			.hyperSlice(image.getImgPlus(), cIndex, 0);
 
 		System.out.println("num dimensions of hyperslice is " + raiViews
 			.numDimensions());

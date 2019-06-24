@@ -74,15 +74,15 @@ public class Ex3c_CropHyperslice2 {
 
 		// crop using ops 
 		RandomAccessibleInterval<T> raiOps = (RandomAccessibleInterval<T>) ij.op()
-			.transform().crop(image, interval);
+			.transform().crop(image.getImgPlus(), interval);
 
 		// or use Views
 		RandomAccessibleInterval<T> raiViews = (RandomAccessibleInterval<T>) Views
-			.hyperSlice(image, cIndex, 0);
+			.hyperSlice(image.getImgPlus(), cIndex, 0);
 
 		// or you can even use views from ops
 		RandomAccessibleInterval<T> raiViews2 = (RandomAccessibleInterval<T>) ij
-			.op().transform().hyperSliceView(image, cIndex, 0);
+			.op().transform().hyperSliceView(image.getImgPlus(), cIndex, 0);
 		System.out.println("num dimensions from ops method are " + raiOps
 			.numDimensions());
 
