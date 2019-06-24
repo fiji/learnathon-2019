@@ -72,6 +72,17 @@ Pressing `ctrl-O` inside Paintera triggers a context menu for opening data.
 
 Paintera can be extended with other data sets.
 
+## Extensions
+
+An example for Paintera extensions is provided in https://github.com/hanslovsky/paintera-opener-menu-entry. Install locally and run Paintera with the jar on the classpath to see the changes to the open dataset context menu:
+
+```sh
+git clone https://github.com/hanslovsky/paintera-opener-menu-entry
+cd paintera-opener-menu-entry
+mvn clean install
+paintera --additional-endpoints my.group:my.artifact:0.1.0-SNAPSHOT --
+```
+
 ## Topics
  - Navigation
  - 3D visualization
