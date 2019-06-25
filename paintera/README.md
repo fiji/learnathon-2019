@@ -136,6 +136,7 @@ For a cheat sheet of shortcuts, see https://github.com/saalfeldlab/paintera#usag
 
 ## Acknowledgements
 
+ - <a href="https://github.com/tpietzsch"><img src="https://avatars2.githubusercontent.com/u/622070?s=460&v=4" alt="Tobias Pietzsch" width="50"></a> [Tobias Pietzsch](https://github.com/tpietzsch) created the foundation of Paintera with [ImgLib2](https://github.com/imglib/imglib2) and the multi-resolution renderer of [BigDataViewer](https://github.com/bigdataviewer/bigdataviewer-core).
  - <a href="https://github.com/igorpisarev"><img src="https://avatars3.githubusercontent.com/u/6253116?s=400&v=4" alt="Igor Pisarev" width="50"></a> [Igor Pisarev](https://github.com/igorpisarev) had major contributions to improve usability of Paintera, most recently: shape interpolation painting.
  - <a href="https://github.com/ssinhaleite"><img src="https://avatars2.githubusercontent.com/u/22590761?s=460&v=4" alt="Vanessa Leite" width="50"></a> [Vanessa Leite](https://github.com/ssinhaleite) contributed in the early development stages of Paintera, in particular the initial version of the marching cubes mesh generation.
  - <a href="https://github.com/neptunes5thmoon"><img src="https://avatars3.githubusercontent.com/u/7736327?s=460&v=4" alt="Larissa Heinrich" width="50"></a> [Larissa Heinrich](https://github.com/neptunes5thmoon) created the synaptic cleft predictions used in this example.
