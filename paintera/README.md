@@ -72,16 +72,11 @@ Pressing `ctrl-O` inside Paintera triggers a context menu for opening data.
 
 Paintera can be extended with other data sets.
 
-## Extensions
+### Label Multisets
 
-An example for Paintera extensions is provided in https://github.com/hanslovsky/paintera-opener-menu-entry. Install locally and run Paintera with the jar on the classpath to see the changes to the open dataset context menu:
-
-```sh
-git clone https://github.com/hanslovsky/paintera-opener-menu-entry
-cd paintera-opener-menu-entry
-mvn clean install
-paintera --additional-endpoints my.group:my.artifact:0.1.0-SNAPSHOT --
-```
+![Winner-takes-all downsampling](mesh-winner-takes-all-cyan.png)
+![Label multiset downsampling](mesh-multisets-magenta.png)
+![Label multiset downsampling over winner-takes-all downsampling](mesh-multisets-vertices-wta-solid-magenta-cyan.png)
 
 I will go through the source code if people are interested.
 
@@ -133,6 +128,17 @@ During the live-demo, I will demonstrate navigations:
    - Not yet in UI: Rendering of synapses that intersect with selected neurons
 
 For a cheat sheet of shortcuts, see https://github.com/saalfeldlab/paintera#usage
+
+## Extensions
+
+An example for Paintera extensions is provided in https://github.com/hanslovsky/paintera-opener-menu-entry. Install locally and run Paintera with the jar on the classpath to see the changes to the open dataset context menu:
+
+```sh
+git clone https://github.com/hanslovsky/paintera-opener-menu-entry
+cd paintera-opener-menu-entry
+mvn clean install
+paintera --additional-endpoints my.group:my.artifact:0.1.0-SNAPSHOT --
+```
 
 ## Acknowledgements
 
