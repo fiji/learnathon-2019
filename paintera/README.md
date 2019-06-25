@@ -134,6 +134,13 @@ During the live-demo, I will demonstrate navigations:
 
 For a cheat sheet of shortcuts, see https://github.com/saalfeldlab/paintera#usage
 
+## Acknowledgements
+
+ - <a href="https://github.com/igorpisarev"><img src="https://avatars3.githubusercontent.com/u/6253116?s=400&v=4" alt="Igor Pisarev" width="50"></a> [Igor Pisarev](https://github.com/igorpisarev) had major contributions to improve usability of Paintera, most recently: shape interpolation painting.
+ - <a href="https://github.com/ssinhaleite"><img src="https://avatars2.githubusercontent.com/u/22590761?s=460&v=4" alt="Vanessa Leite" width="50"></a> [Vanessa Leite](https://github.com/ssinhaleite) contributed in the early development stages of Paintera, in particular the initial version of the marching cubes mesh generation.
+ - <a href="https://github.com/neptunes5thmoon"><img src="https://avatars3.githubusercontent.com/u/7736327?s=460&v=4" alt="Larissa Heinrich" width="50"></a> [Larissa Heinrich](https://github.com/neptunes5thmoon) created the synaptic cleft predictions used in this example.
+ - <a href="https://github.com/constantinpape"><img src="https://scholar.google.de/citations?view_op=medium_photo&user=idkzOIUAAAAJ&citpid=1" alt="Constantin Pape" width="50"></a> [Constantin Pape](https://github.com/constantinpape) created the neuron segmentation used in this example.
+
 ## Resources
 
  - https://github.com/saalfeldlab/paintera
