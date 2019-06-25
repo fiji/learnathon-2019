@@ -83,16 +83,56 @@ mvn clean install
 paintera --additional-endpoints my.group:my.artifact:0.1.0-SNAPSHOT --
 ```
 
-## Topics
- - Navigation
- - 3D visualization
- - Label voxel manipulations
-   - Painting
-   - Flood-filling 2D/3D
-   - Splitting objects
-   - Shape interpolation (hot new awesome feature added by @igorpisarev)
- - Super-voxel (fragment) agglomeration
- - Extensions
+I will go through the source code if people are interested.
+
+## 3D visualization
+
+3D representations for label data is generated on the fly as needed and cached using imglib2-cache. Pre-computation of triangle meshes is not necessary and meshes can be updated as needed, e.g. when voxel data is modified or super-voxel agglomeration changes. Paintera data format holds a index of all containing blocks for a label for each label and is the preferred format for efficient generation of 3D representations. Plain single- or multi-scale datasets are supported but the entire dataset will have to be processed for mesh generation of each single label (slow for large data). Meshes are generated at all mipmap levels provided by the dataset and the user can select the desired level-of-detail.
+
+## Controls & Usage
+
+During the live-demo, I will demonstrate navigations:
+ - basic controls:
+   - Open preferences on the right for
+     - Data set (source) specific setting
+     - General settings
+   - Open and remove sources
+   - Cycle through sources
+   - Toggle source visibility
+   - Maximize current viewer
+   - Save current project state
+ - basic navigation (easy if you are familiar with BigDataViewer):
+   - Translation (within and orthogonal toviewer plane)
+   - Arbitrary rotations (also un-rotate/axis-align)
+   - Zoom levels
+ - Raw data
+   - Single-channel
+   - Multi-channel
+   - Converter settings (contrast, alpha)
+   - Threshold
+ - Label data
+   - Create empty label data set
+   - Converter settings
+   - Change color stream seed
+   - Select (or append) label id
+   - Select new, previously unused id
+   - Toggle visibility of not-selected ids
+   - Label voxel manipulations:
+     - Painting:
+       - Change brush size
+       - Selected id
+       - Background
+       - Erase
+     - Flood-filling 2D/3D
+     - Shape interpolation (hot new awesome feature added by @igorpisarev)
+     - Clear mesh caches
+   - Super-voxel (fragment) agglomeration:
+     - Merge
+     - Detach/split
+     - Undo
+   - Not yet in UI: Rendering of synapses that intersect with selected neurons
+
+For a cheat sheet of shortcuts, see https://github.com/saalfeldlab/paintera#usage
 
 ## Resources
 
