@@ -19,3 +19,6 @@
 [submodule "imglib2-introductory-workshop"]
 	path = imglib2-introductory-workshop
 	url = git://github.com/imglib/imglib2-introductory-workshop
+[submodule "imagej-roi-course"]
+	path = imagej-roi-course
+	url = git://github.com/maarzt/imagej-roi-course
