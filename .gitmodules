@@ -25,3 +25,6 @@
 [submodule "imagej-scijava-course"]
 	path = imagej-scijava-course
 	url = git://github.com/maarzt/imagej-scijava-course
+[submodule "sciview-tutorial"]
+	path = sciview-tutorial
+	url = https://github.com/skalarproduktraum/sciview-tutorial
