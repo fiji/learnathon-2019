@@ -22,3 +22,6 @@
 [submodule "imagej-roi-course"]
 	path = imagej-roi-course
 	url = git://github.com/maarzt/imagej-roi-course
+[submodule "imagej-scijava-course"]
+	path = imagej-scijava-course
+	url = git://github.com/maarzt/imagej-scijava-course
