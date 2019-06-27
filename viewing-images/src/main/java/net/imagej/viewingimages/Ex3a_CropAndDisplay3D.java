@@ -38,11 +38,11 @@ public class Ex3a_CropAndDisplay3D {
 
 		// crop interval
 		RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) ij.op()
-			.transform().crop(image, interval);
+			.transform().crop(image.getImgPlus(), interval);
 
 		// alternatively you can use Views directly
 		RandomAccessibleInterval<T> rai2 = (RandomAccessibleInterval<T>) Views
-			.interval(image, interval);
+			.interval(image.getImgPlus(), interval);
 
 		// display the image
 		ij.ui().show("RAI volume", rai);
@@ -57,7 +57,7 @@ public class Ex3a_CropAndDisplay3D {
 
 		// crop interval
 		RandomAccessibleInterval<T> rai = (RandomAccessibleInterval<T>) ij.op()
-			.transform().crop(image, interval);
+			.transform().crop(image.getImgPlus(), interval);
 
 		long end = System.nanoTime();
 		
@@ -67,7 +67,7 @@ public class Ex3a_CropAndDisplay3D {
 
 		// alternatively you can use Views directly
 		RandomAccessibleInterval<T> rai2 = (RandomAccessibleInterval<T>) Views
-			.interval(image, interval);
+			.interval(image.getImgPlus(), interval);
 
 		end = System.nanoTime();
 		

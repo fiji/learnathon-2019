@@ -32,7 +32,7 @@ public class Ex4a_3DPermute {
 		IJ2CourseImageUtility.displayAxisInfo(data, ij.log());
 		ij.ui().show("Data ", data);
 
-		IntervalView<T> dataXZY = Views.permute((RandomAccessibleInterval<T>) data,
+		IntervalView<T> dataXZY = Views.permute((RandomAccessibleInterval<T>) data.getImgPlus(),
 			1, 3);
 
 		ij.ui().show("Data XZY", dataXZY);
