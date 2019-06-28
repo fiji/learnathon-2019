@@ -28,3 +28,6 @@
 [submodule "sciview-tutorial"]
 	path = sciview-tutorial
 	url = https://github.com/skalarproduktraum/sciview-tutorial
+[submodule "scijava-parallel-learnathon-examples"]
+	path = scijava-parallel-learnathon-examples
+	url = git://github.com/fiji-hpc/scijava-parallel-learnathon-examples
