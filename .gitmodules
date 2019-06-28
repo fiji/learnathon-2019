@@ -31,3 +31,6 @@
 [submodule "scijava-parallel-learnathon-examples"]
 	path = scijava-parallel-learnathon-examples
 	url = git://github.com/fiji-hpc/scijava-parallel-learnathon-examples
+[submodule "example-imagej-command"]
+	path = example-imagej-command
+	url = git://github.com/frauzufall/example-imagej-command
