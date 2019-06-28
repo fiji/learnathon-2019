@@ -99,6 +99,12 @@
 			<groupId>sc.fiji</groupId>
 			<artifactId>simplified-io</artifactId>
 			<version>1.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
