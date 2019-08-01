@@ -32,11 +32,11 @@ If your are on 18.10 or newer, add the bionic repositories following instruction
 
 Paintera is available for installation through [conda](https://conda.io):
 ```sh
-conda install -c conda-forge -c hanslovsky paintera
+conda install -c conda-forge paintera
 ```
 Or, to create a new environment for Paintera with the name *paintera*:
 ```sh
-conda create -n paintera -c conda-forge -c hanslovsky paintera
+conda create -n paintera -c conda-forge paintera
 conda activate paintera
 ```
 
