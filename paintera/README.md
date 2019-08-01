@@ -13,7 +13,7 @@ with JavaFX. Alternatively, [OpenJDK](https://openjdk.java.net/install) does not
 ```sh
 # Arch Linux
 pacman -S jdk8-openjdk
-pacman -S java-openjfx
+pacman -S java8-openjfx
 pacman -S maven
 
 # Ubuntu
