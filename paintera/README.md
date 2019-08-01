@@ -6,6 +6,7 @@ I will demonstrate the core functionality of Paintera in a live demo and will ex
 
 ## Installation
 
+Installation instructions are also available on the [Paintera GitHub repository](https://github.com/saalfeldlab/paintera#installation-and-usage).
 Paintera depends on Java 8, JavaFX, and [Apache Maven](https://maven.apache.org). [Oracle
 JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) ships
 with JavaFX. Alternatively, [OpenJDK](https://openjdk.java.net/install) does not ship with JavaFX and JavaFX needs to be installed separately. Many Linux distributions provide OpenJDK 8 and JavaFX through their package managers, e.g.
